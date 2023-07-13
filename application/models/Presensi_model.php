@@ -15,114 +15,92 @@ class Presensi_model extends CI_Model
         parent::__construct();
     }
 
+    // get all
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
 
-    function get_all_query_1()
+    function get_all_query($id)
     {
-        $this->db->select('a.id_absen, a.tgl, a.jam_msk, a.jam_klr, a.nomor_induk, b.nama_santri as nama_user, c.nama_khd, a.ket, d.nama_status, d.id_status');
-        $this->db->from('presensi a');
-        $this->db->join('santri b', 'a.nomor_induk = b.nis', 'left');
-        $this->db->join('kehadiran c', 'a.id_khd = c.id_khd', 'left');
-        $this->db->join('stts d', 'a.id_status = d.id_status', 'left');
-        $this->db->like('a.nomor_induk', "S");
-        $query = $this->db->get()->result();
-        return $query;
+
+        $sql = "SELECT a.id_absen,b.id_karyawan,b.nama_karyawan,a.tgl,a.jam_msk,a.jam_klr,c.nama_khd,a.ket,d.nama_status,d.id_status
+              FROM presensi as a,karyawan as b,kehadiran as c,stts as d,gedung as e
+              WHERE a.id_karyawan=b.id_karyawan
+              AND c.id_khd=a.id_khd
+              AND d.id_status=a.id_status
+              AND e.gedung_id=b.gedung_id
+              AND e.gedung_id=$id";
+        return $this->db->query($sql)->result();
     }
 
-    function get_all_query_2()
+    function get_all_q($id)
     {
-        $this->db->select('a.id_absen, a.tgl, a.jam_msk, a.jam_klr, a.nomor_induk, b.nama_pengajar as nama_user, c.nama_khd, a.ket, d.nama_status, d.id_status');
-        $this->db->from('presensi a');
-        $this->db->join('pengajar b', 'a.nomor_induk = b.nip', 'left');
-        $this->db->join('kehadiran c', 'a.id_khd = c.id_khd', 'left');
-        $this->db->join('stts d', 'a.id_status = d.id_status', 'left');
-        $this->db->like('a.nomor_induk', "P");
-        $query = $this->db->get()->result();
-        return $query;
-    }
-
-    function get_all_q_1()
-    {
-        $this->datatables->select('a.id_absen, a.tgl, a.jam_msk, a.jam_klr, a.nomor_induk, b.nama_santri as nama_user, c.id_khd, c.nama_khd, a.ket, d.nama_status, d.id_status');
-        $this->datatables->from('presensi a');
-        $this->datatables->join('santri b', 'a.nomor_induk = b.nis', 'left');
-        $this->datatables->join('kehadiran c', 'a.id_khd = c.id_khd', 'left');
-        $this->datatables->join('stts d', 'a.id_status = d.id_status', 'left');
-        $this->datatables->like('a.nomor_induk', "S");
+        $this->datatables->select('a.id_absen,b.id_karyawan,b.nama_karyawan,a.tgl,a.jam_msk,a.jam_klr,c.id_khd,c.nama_khd,a.ket,d.nama_status,d.id_status')
+            ->from('presensi as a,karyawan as b,kehadiran as c,stts as d')
+            ->where('b.gedung_id', $id)
+            ->where('a.id_karyawan=b.id_karyawan')
+            ->where('c.id_khd=a.id_khd')
+            ->where('d.id_status=a.id_status');
         return $this->datatables->generate();
     }
 
-    function get_all_q_2()
-    {
-        $this->datatables->select('a.id_absen, a.tgl, a.jam_msk, a.jam_klr, a.nomor_induk, b.nama_pengajar as nama_user, c.id_khd, c.nama_khd, a.ket, d.nama_status, d.id_status');
-        $this->datatables->from('presensi a');
-        $this->datatables->join('pengajar b', 'a.nomor_induk = b.nip', 'left');
-        $this->datatables->join('kehadiran c', 'a.id_khd = c.id_khd', 'left');
-        $this->datatables->join('stts d', 'a.id_status = d.id_status', 'left');
-        $this->datatables->like('a.nomor_induk', "P");
-        return $this->datatables->generate();
-    }
-
+    // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->result();
     }
 
+
+    // insert data
     function insert($data)
     {
         $this->db->insert($this->table, $data);
     }
 
+    // update data
     function update($id, $data)
     {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
 
+    // delete data
     function delete($id)
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
 
-    function search_value($title)
+    function search_value($title, $id)
     {
-        $this->db->trans_start();
-        $query_result_1 = $this->db->select('nis as nomor_induk, nama_santri as nama_user')->like('nama_santri', $title, 'both')->limit(10)->get('santri');
-        $query_result_2 = $this->db->select('nip as nomor_induk, nama_pengajar as nama_user')->like('nama_pengajar', $title, 'both')->limit(10)->get('pengajar');
-        $this->db->trans_complete();
-
-        if ($query_result_1->num_rows() > 0) {
-            return $query_result_1->result();
+        $query_result =
+            $this->db->where('gedung_id', $id)
+            ->like('nama_karyawan', $title, 'both')
+            ->order_by('nama_karyawan', 'ASC')
+            ->limit(10)->get('karyawan');
+        if ($query_result->num_rows() > 0) {
+            return $query_result->result();
         } else {
-            if ($query_result_2->num_rows() > 0) {
-                return $query_result_2->result();
-            } else {
-                return false;
-            }
+            return false;
         }
     }
 
     function get_by_ids($id)
     {
-        $this->db->select('a.id_absen, a.nomor_induk, b.nama_santri as nama_user_1, c.nama_pengajar as nama_user_2,  a.tgl, a.jam_msk, a.jam_klr, a.id_khd, a.ket, a.id_status');
-        $this->db->from('presensi a');
-        $this->db->join('santri b', 'a.nomor_induk = b.nis', 'left');
-        $this->db->join('pengajar c', 'a.nomor_induk = c.nip', 'left');
-        $this->db->where('a.id_absen', $id);
-        $query = $this->db->get()->row();
-        return $query;
+        return $this->db->where($this->id, $id)
+            ->join('karyawan', 'karyawan.id_karyawan =' . $this->table . '.id_karyawan', 'left')
+            ->get('presensi')
+            ->row();
     }
 
-    function cek_id($nomor_induk, $tgl)
+
+    function cek_id($id_karyawan, $tgl)
     {
-        $query_str = "SELECT * FROM presensi WHERE nomor_induk = ? AND tgl= ? ";
-        $result = $this->db->query($query_str, array($nomor_induk, $tgl));
+        $query_str = "SELECT * FROM presensi WHERE id_karyawan= ? AND tgl= ? ";
+        $result = $this->db->query($query_str, array($id_karyawan, $tgl));
         if ($result->num_rows() == 1) {
             return $result;
         } else {

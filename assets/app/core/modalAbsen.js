@@ -19,7 +19,7 @@ $(() => {
 });
 
 const LoadData = (_id, _id2, id3) => {
-    var kar = $(this).data('nomor_induk');
+    var kar = $(this).data('id_karyawan');
     var d = new Date();
     d.setDate(1);
     var month = '' + (d.getMonth() + 1);
@@ -41,7 +41,7 @@ const LoadData = (_id, _id2, id3) => {
             $(document.getElementById('datakar')).html(data);
         },
         error: function (_jqXHR, _textStatus, _errorThrown) {
-            window.location.href = "rekap";
+            alert('Error adding / update data');
         }
     });
 };
@@ -52,7 +52,7 @@ const LoadData = (_id, _id2, id3) => {
 const save = () => {
     var id = $(document.getElementById('id')).val();
     var id_khd = $(document.getElementById('id_khd')).val();
-    var id2 = $(document.getElementById('nomor_induk')).val();
+    var id2 = $(document.getElementById('id_karyawan')).val();
     var ket = $(document.getElementById('ket')).val();
     var id3 = $(document.getElementById('id3')).val();
     var url = "rekap/addkhd/";
@@ -62,7 +62,7 @@ const save = () => {
         data: {
             tgl: id,
             id_khd: id_khd,
-            nomor: id2,
+            id_karyawan: id2,
             ket: ket,
             id3: id3,
         },

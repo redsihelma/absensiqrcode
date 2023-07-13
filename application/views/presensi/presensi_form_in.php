@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/jQueryUI/css/jquery-ui.css">
-
+<?php $gedung = $this->Gedung_model->get_by_id($segment = $this->uri->segment(3));
+?>
 <!-- Main content -->
 <section class='content'>
     <div class='row'>
@@ -10,10 +11,11 @@
                 </div>
                 <div class="box-body">
                     <form role="form" id="myForm" data-toggle="validator" action="<?php echo $action; ?>" method="post">
+                        <input type="hidden" name="id" id="id" value="<?php echo $gedung->gedung_id ?>">
                         <div class="form-group">
-                            <label for="nomor_induk" class="control-label">Nama User</label>
+                            <label for="id_karyawan" class="control-label">Nama Karyawan</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" data-error="Nama user harus diisi" name="nomor_induk" id="nomor_induk" placeholder="Nama" required />
+                                <input type="text" class="form-control" data-error="Nama Karyawan harus diisi" name="id_karyawan" id="id_karyawan" placeholder="nama karyawan" required />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </span>
@@ -59,10 +61,10 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#nomor_induk').autocomplete({
-            source: "<?php echo site_url('presensi/get_autocomplete'); ?>",
+        $('#id_karyawan').autocomplete({
+            source: "<?php echo site_url('presensi/get_autocomplete/' . $gedung->gedung_id); ?>",
             select: function(event, ui) {
-                $('[name="nomor_induk"]').val(ui.item.label);
+                $('[name="id_karyawan"]').val(ui.item.label);
             }
         });
     });

@@ -29,8 +29,7 @@ $(document).ready(function () {
         columns:
             [
                 { 'data': 'id_absen', defaultContent: '' },
-                { "data": "nama_user" },
-                { "data": "nomor_induk" },
+                { "data": "nama_karyawan" },
                 { "data": "tgl" },
                 { "data": "jam_msk" },
                 { "data": "jam_klr" },
@@ -44,7 +43,7 @@ $(document).ready(function () {
                 "data": {
                     "id_absen": "id_absen",
                 },
-                "targets": 9,
+                "targets": 8,
                 "orderable": false,
                 "searchable": false,
                 "render": function (data, type, row, meta) {
@@ -66,28 +65,28 @@ $(document).ready(function () {
         ],
         "createdRow": function (row, data, index) {
             if (data.id_status == 1) {
-                $('td', row).eq(8).html('<span class="label label-success">' + data.nama_status + '</span>');
+                $('td', row).eq(7).html('<span class="label label-success">' + data.nama_status + '</span>');
             }
             else if (data.id_status == 2) {
-                $('td', row).eq(8).html('<span class="label label-danger">' + data.nama_status + '</span>');
+                $('td', row).eq(7).html('<span class="label label-danger">' + data.nama_status + '</span>');
             }
             else {
-                $('td', row).eq(8).html('<span class="label label-default">' + data.nama_status + '</span>');
+                $('td', row).eq(7).html('<span class="label label-default">' + data.nama_status + '</span>');
             }
             if (data.id_khd == 1) {
-                $('td', row).eq(6).html('<span class="label label-success">' + data.nama_khd + '</span>');
+                $('td', row).eq(5).html('<span class="label label-success">' + data.nama_khd + '</span>');
             }
             else if (data.id_khd == 2) {
-                $('td', row).eq(6).html('<span class="label label-info">' + data.nama_khd + '</span>');
+                $('td', row).eq(5).html('<span class="label label-info">' + data.nama_khd + '</span>');
             }
             else if (data.id_khd == 3) {
-                $('td', row).eq(6).html('<span class="label label-warning">' + data.nama_khd + '</span>');
+                $('td', row).eq(5).html('<span class="label label-warning">' + data.nama_khd + '</span>');
             }
             else if (data.id_khd == 4) {
-                $('td', row).eq(6).html('<span class="label label-danger">' + data.nama_khd + '</span>');
+                $('td', row).eq(5).html('<span class="label label-danger">' + data.nama_khd + '</span>');
             }
             else {
-                $('td', row).eq(6).html('<span class="label label-default">' + data.nama_khd + '</span>');
+                $('td', row).eq(5).html('<span class="label label-default">' + data.nama_khd + '</span>');
             }
         },
         dom: 'Blfrtip',
@@ -101,14 +100,14 @@ $(document).ready(function () {
             },
             {
                 extend: 'excel',
-                title: 'HISTORI ABSENSI',
+                title: 'HISTORI ABSENSI ' + gedung,
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 7],
                 },
             },
             {
                 extend: 'copy',
-                title: 'HISTORI ABSENSI',
+                title: 'HISTORI ABSENSI ' + gedung,
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 7],
                 },
@@ -117,7 +116,7 @@ $(document).ready(function () {
                 extend: 'pdf',
                 oriented: 'portrait',
                 pageSize: 'legal',
-                title: 'HISTORI ABSENSI',
+                title: 'HISTORI ABSENSI ' + gedung,
                 download: 'open',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 7],
@@ -132,7 +131,7 @@ $(document).ready(function () {
                 extend: 'print',
                 oriented: 'portrait',
                 pageSize: 'A4',
-                title: 'HISTORI ABSENSI',
+                title: 'HISTORI ABSENSI ' + gedung,
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 7],
                 },

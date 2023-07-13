@@ -40,15 +40,13 @@
             <!-- /.login-logo -->
             <div class="login-box-body">
                 <div class="text-center">
-                    <img src="<?php echo base_url('assets/'); ?>images/LogoTPQ.png">
+                    <img src="<?php echo base_url('assets/'); ?>images/Logo.png">
                 </div>
                 <h3 class="text-center mt-0">
                     <b>
-                        <font color="green">S
-                    </b>istem <b>A</b>bsensi <b>QR</b>code <br>
-                    <b>TPQ Al Fatih</font></b>
+                        <font color="green">S</b>istem <b>A</b>bsensi <b>QR</b>code <br></font></b>
                 </h3>
-                <a href="<?= base_url('scan'); ?>" target="_BLANK"><b>Klik untuk scan absensi!</b></a>
+                <a href="<?= base_url('scans'); ?>" target="_BLANK"><b>Klik untuk scan absensi!</b></a>
                 <p class="login-box-msg"></p>
                 <div id="infoMessage" class="text-center"><?php echo $message; ?></div>
                 <?= form_open("auth/cek_login", array('id' => 'login')); ?>

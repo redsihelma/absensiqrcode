@@ -22,15 +22,16 @@
         white-space: nowrap;
     }
 </style>
+<?php $gedung = $this->Gedung_model->get_by_id($segment = $this->uri->segment(3)); ?>
 <!-- Main content -->
 <section class='content'>
     <div class='row'>
         <div class='col-xs-12'>
             <div class='box box-primary'>
                 <div class='box-header  with-border'>
-                    <h3 class='box-title'>HISTORI ABSENSI</h3>
+                    <h3 class='box-title'>HISTORI ABSENSI <?php echo $gedung->nama_gedung ?></h3>
                     <div class="pull-right">
-                        <?php echo anchor(site_url('presensi/create'), ' <i class="fa fa-plus"></i> &nbsp;&nbsp; Tambah Baru', ' class="btn btn-unique btn-lg btn-create-data btn3d"'); ?>
+                        <?php echo anchor(site_url('presensi/create/' . $gedung->gedung_id), ' <i class="fa fa-plus"></i> &nbsp;&nbsp; Tambah Baru', ' class="btn btn-unique btn-lg btn-create-data btn3d"'); ?>
                     </div>
                 </div>
                 <div class="box-body">
@@ -53,14 +54,13 @@
                             <tr>
                                 <th class="all">No</th>
                                 <th class="all">Nama</th>
-                                <th class="all">Nomor Induk</th>
-                                <th class="desktop">Tanggal</th>
+                                <th class="all">Tanggal</th>
                                 <th class="desktop">Jam Masuk</th>
                                 <th class="desktop">Jam Keluar</th>
                                 <th class="desktop">Kehadiran</th>
                                 <th class="desktop">Keterangan</th>
                                 <th class="desktop">status </th>
-                                <th class="all">Action</th>
+                                <th class="desktop">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +79,8 @@
 </script>
 <script type="text/javascript">
     let segment = '<?= $this->uri->segment(3) ?>';
+    <?php $gedung = $this->Gedung_model->get_by_id($segment = $this->uri->segment(3)); ?>
+    let gedung = '<?= $gedung->nama_gedung ?>'
 </script>
 <script type="text/javascript">
     let checkLogin = '<?= $result ?>';

@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 2.3.0
     </div>
-    <strong> &copy; 2021 <a href="#">Absensi TPQ Al Fatih</a>.</strong> Template by Yayasan Al Fatih
+    <strong> &copy; 2023 <a href="#">Absensi Karyawan Menggunakan Qrcode</a>.</strong> Template by Reza Maulana Rizky |  <a href='https://www.instagram.com/redsientertainment/' title='StokCoding.com' target='_blank'>redsientertainment</a>
+	
 </footer>
