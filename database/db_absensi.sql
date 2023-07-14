@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jun 2022 pada 03.17
+-- Waktu pembuatan: 14 Jul 2023 pada 13.19
 -- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.4.26
+-- Versi PHP: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,30 +93,31 @@ CREATE TABLE `karyawan` (
   `nama_karyawan` varchar(30) NOT NULL,
   `jabatan` int(11) NOT NULL,
   `id_shift` int(20) NOT NULL,
-  `gedung_id` int(11) NOT NULL
+  `gedung_id` int(11) NOT NULL,
+  `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data untuk tabel `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shift`, `gedung_id`) VALUES
-(138, 'L2204001', 'SUHARIS, S.Ip.', 7, 8, 14),
-(139, 'S2204138', 'KASMONO, SE', 8, 8, 14),
-(140, 'S2204139', 'VITA PRIHATIK, S.Sos', 9, 8, 14),
-(141, 'S2204140', 'ZAENAL ARFIN', 9, 8, 14),
-(142, 'S2204141', 'WILI SOMANTRI', 9, 8, 14),
-(143, 'K2204142', 'UMI SALAMAH, S.AP', 10, 8, 14),
-(144, 'S2204143', 'BAYU SRI SUSILOWATI', 9, 8, 14),
-(145, 'S2204144', 'ARYA SETIADI, A.MD. T', 9, 8, 14),
-(146, 'S2204145', 'HERI WAHYUDI, A.MD. KOM', 9, 8, 14),
-(147, 'S2204146', 'AHKMAD SOLEHUDIN', 9, 8, 14),
-(148, 'S2204147', 'YUDIONO', 9, 8, 14),
-(149, 'S2204148', 'WAYO', 9, 8, 14),
-(150, 'S2204149', 'YUNI SULISTYOWATI', 9, 8, 14),
-(151, 'S2204150', 'YUNI DWI INDRIANI', 9, 8, 14),
-(152, 'S2204151', 'MUHAEMIN', 9, 8, 14),
-(153, 'S2204152', 'DIDI NURDIANSYAH', 9, 8, 14);
+INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama_karyawan`, `jabatan`, `id_shift`, `gedung_id`, `email`) VALUES
+(138, 'L2204001', 'SUHARIS, S.Ip.', 7, 8, 14, 'suharis@gmail.com'),
+(139, 'S2204138', 'KASMONO, SE', 8, 8, 14, 'kasmono@gmail.com'),
+(140, 'S2204139', 'VITA PRIHATIK, S.Sos', 9, 8, 14, 'vita@gmail.com'),
+(141, 'S2204140', 'ZAENAL ARFIN', 9, 8, 14, '0'),
+(142, 'S2204141', 'WILI SOMANTRI', 9, 8, 14, '0'),
+(143, 'K2204142', 'UMI SALAMAH, S.AP', 10, 8, 14, '0'),
+(144, 'S2204143', 'BAYU SRI SUSILOWATI', 9, 8, 14, '0'),
+(145, 'S2204144', 'ARYA SETIADI, A.MD. T', 9, 8, 14, '0'),
+(146, 'S2204145', 'HERI WAHYUDI, A.MD. KOM', 9, 8, 14, '0'),
+(147, 'S2204146', 'AHKMAD SOLEHUDIN', 9, 8, 14, '0'),
+(148, 'S2204147', 'YUDIONO', 9, 8, 14, '0'),
+(149, 'S2204148', 'WAYO', 9, 8, 14, '0'),
+(150, 'S2204149', 'YUNI SULISTYOWATI', 9, 8, 14, '0'),
+(151, 'S2204150', 'YUNI DWI INDRIANI', 9, 8, 14, '0'),
+(152, 'S2204151', 'MUHAEMIN', 9, 8, 14, '0'),
+(153, 'S2204152', 'DIDI NURDIANSYAH', 9, 8, 14, '0');
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,8 @@ CREATE TABLE `presensi` (
 --
 
 INSERT INTO `presensi` (`id_absen`, `id_karyawan`, `tgl`, `jam_msk`, `jam_klr`, `id_khd`, `ket`, `id_status`) VALUES
-(90, 'L2206154', '2022-06-20', '10:56:51', '00:00:00', 1, '', 1);
+(90, 'L2206154', '2022-06-20', '10:56:51', '00:00:00', 1, '', 1),
+(97, 'S2204143', '2023-06-27', '02:02:13', '00:00:00', 1, '', 1);
 
 -- --------------------------------------------------------
 
@@ -284,7 +286,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(26, '::1', 'admin@admin.com', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1655741102, 1, 'admin', 'nistator', NULL, '123412341234'),
+(26, '::1', 'admin@admin.com', '$2y$12$MPcQlOck9fzd/5UjJ6iIXuhZivhkXdfoVD2xFXpZTnZ2IWQw/nFhW', 'admin@admin.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1556798313, 1689306356, 1, 'admin', 'nistator', NULL, '123412341234'),
 (34, '::1', 'jefrimaruli@gmail.com', '$2y$12$yt3Qu8yQzdT3zYSgbDyDsOCi6d6TMtIrCTzB.nJaruVCO5hDMdtm2', 'jefrimaruli@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1560355548, 1560524242, 1, 'Jeff', 'Maruli', NULL, '9832349234'),
 (46, '::1', 'operator@operator.com', '$2y$10$ibxBt.RYG7jib0JxBxB1.usc9pzjqUqPPTvwLgPp1gMRKg6VMLLei', 'operator@operator.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1562178403, 1654590778, 1, 'operator', '2', NULL, '34890234809238490'),
 (47, '::1', 'staff@staff.com', '$2y$12$RHPXgho6UJLQWv8W3F9oJekbSnFYXyhNADZvuqaYmGEoUD6Yl1Hd.', 'staff@staff.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1564294648, 1564294659, 1, 'staf', 'staff', NULL, '239423849234890');
@@ -420,7 +422,7 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT untuk tabel `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT untuk tabel `kehadiran`
@@ -444,7 +446,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT untuk tabel `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT untuk tabel `shift`
