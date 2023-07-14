@@ -40,7 +40,7 @@
             <!-- /.login-logo -->
             <div class="login-box-body">
                 <div class="text-center">
-                    <img src="<?php echo base_url('assets/'); ?>images/Logo.png">
+                    <img src="<?php echo base_url('assets/'); ?>images/logo.png">
                 </div>
                 <h3 class="text-center mt-0">
                     <b>
