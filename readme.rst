@@ -54,9 +54,9 @@ Employee Attendance QR Code
 
 QR Code Employee Attendance created with the CI-3 Framework
 
-################################
+###################################################################
 The difference between this application and the previous one:
-################################
+###################################################################
 
 1. This application when registering employees
    Add employee email to send
