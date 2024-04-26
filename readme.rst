@@ -44,4 +44,51 @@ cara menjalankan aplikasi ini:
    masing masing device. beda lagi jika aplikasi sudah di hosting/di onlinekan
 
 
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
 
+
+####################
+Employee Attendance QR Code
+####################
+
+QR Code Employee Attendance created with the CI-3 Framework
+
+############################################
+The difference between this application and the previous one:
+############################################
+
+1. This application when registering employees
+   Add employee email to send
+   the employee's qrcode
+
+2. This application adds a send email feature
+   to employees to send their qr code
+   send this email located in fetch qecode afterwards
+   Enter the employee's name and send email appears
+
+3. add download qrcode to send to
+   employee emails that have been previously registered
+   The location is the same as the send email feature
+
+4. add qr code scan without login
+
+################################
+How to run this application:
+################################
+
+1. In this application, you can install CodeIgniter version 3.1.10
+    or use PHP version 5.3.7 or later, in this application
+    using PHP version 7.3.33
+   
+2. This application uses MYSQL for the database, to enter the MYSQL database
+   we need XAMPP, in this application using XAMPP version 3.3.0 download XAMPP
+   version 3.3.0 and install it in the C:\ path after installing the application at
+   C:\xampp\htdocs
+
+3. Open the XAMPP application and click the start Apache and MYSQL button if Apache and MYSQL are green
+   click the admin button in the MYSQL row to enter localhost phpMyAdmin. if you have it in phpMyAdmin create it
+   new database with the name db_absensi then import db_absensi.sql which is in the database folder
+
+4. To run/execute the application, just type http://localhost/absensiqrcode in crome/default browser
+   each device. It's different if the application is hosted/online
